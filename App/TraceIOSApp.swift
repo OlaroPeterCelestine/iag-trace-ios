@@ -30,14 +30,40 @@ final class StoreBox: ObservableObject {
 
 struct RootView: View {
     @EnvironmentObject var box: StoreBox
+    @State private var showSplash = true
 
     var body: some View {
         let _ = box.tick
-        if box.store.isSignedIn {
-            ShellView()
-        } else {
-            LoginView()
+        ZStack {
+            Group {
+                if box.store.isSignedIn {
+                    ShellView()
+                } else {
+                    LoginView()
+                }
+            }
+            if showSplash {
+                SplashView()
+                    .transition(.opacity)
+                    .zIndex(1)
+            }
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
+                withAnimation(.easeOut(duration: 0.35)) { showSplash = false }
+            }
+        }
+    }
+}
+
+struct SplashView: View {
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            IagBrandLogo(height: 132)
+                .padding(.horizontal, 40)
+        }
+        .preferredColorScheme(.dark)
     }
 }
 

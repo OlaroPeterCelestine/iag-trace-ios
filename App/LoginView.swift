@@ -3,8 +3,8 @@ import TraceCore
 
 struct LoginView: View {
     @EnvironmentObject var box: StoreBox
-    @State private var username = ""
-    @State private var password = ""
+    @State private var username = "admin"
+    @State private var password = demoPassword
     @State private var error: String?
     @State private var showReset = false
 
@@ -60,7 +60,7 @@ struct LoginView: View {
                         .tint(IagTheme.orange)
                         .controlSize(.large)
 
-                        Text("Usernames include farmer, supplier, agent, and admin.")
+                        Text("Usernames include farmer, supplier, agent, and admin. Password is iagdemo.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
