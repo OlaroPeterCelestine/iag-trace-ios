@@ -9,6 +9,13 @@ The marketing version in the Xcode target (`1.0.0`) is the source of truth.
 
 ## [Unreleased]
 
+### Changed
+
+- Staff and farmer desks use the same orange grouped layout as IAG Central, with system light and dark mode
+- Sign-in uses the official Inspire Africa Group logo
+
+
+
 ## [1.0.0] - 2026-09-14
 
 ### Added

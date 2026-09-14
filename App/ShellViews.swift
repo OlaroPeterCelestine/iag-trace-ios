@@ -48,49 +48,71 @@ struct OverviewView: View {
         let store = box.store
         let _ = box.tick
         let first = store.user?.name.split(separator: " ").first.map(String.init) ?? "there"
+        let recent = store.recentActivity()
         NavigationStack {
-            List {
-                Section {
-                    Text("Good morning, \(first)").font(.title2.bold())
-                    Text("\(store.user?.name ?? "") · \(store.user?.role.rawValue.capitalized ?? "")")
-                        .foregroundStyle(.secondary)
-                }
-                Section("Snapshot") {
-                    HStack {
-                        kpi("Farmers", "\(store.farmers.count)")
-                        kpi("Lots", "\(store.lots.count)")
-                    }
-                    HStack {
-                        kpi("EUDR", "\(store.eudrPercent())%")
-                        kpi("Inspections", "\(store.pendingInspections.count)")
-                    }
-                }
-                Section("Recent") {
-                    ForEach(store.recentActivity(), id: \.copy) { item in
-                        VStack(alignment: .leading) {
-                            Text(item.title).font(.caption).foregroundStyle(.secondary)
-                            Text(item.copy)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    WelcomeCard(
+                        name: first,
+                        subtitle: "\(store.user?.name ?? "") · \(store.user?.role.rawValue.capitalized ?? "")",
+                        stats: [
+                            WelcomeStat(id: "farmers", label: "Farmers", value: "\(store.farmers.count)"),
+                            WelcomeStat(id: "lots", label: "Lots", value: "\(store.lots.count)"),
+                            WelcomeStat(id: "eudr", label: "EUDR", value: "\(store.eudrPercent())%"),
+                            WelcomeStat(id: "inspect", label: "Checks", value: "\(store.pendingInspections.count)"),
+                        ]
+                    )
+                    IagSectionHeader(title: "Recent")
+                    if recent.isEmpty {
+                        IagGrouped { IagEmptyHint(text: "No recent activity.") }
+                    } else {
+                        IagGrouped {
+                            ForEach(Array(recent.enumerated()), id: \.element.copy) { index, item in
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(item.title).font(.caption).foregroundStyle(.secondary)
+                                    Text(item.copy).font(.subheadline.weight(.medium))
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(16)
+                                if index < recent.count - 1 { Divider().padding(.leading, 16) }
+                            }
                         }
                     }
-                }
-                Section("Shortcuts") {
-                    NavigationLink("Public lookup") { LookupView() }
-                    if let role = store.role, canIntake(role) {
-                        NavigationLink("Web intake") { IntakeView() }
+                    IagSectionHeader(title: "Shortcuts")
+                    IagGrouped {
+                        NavigationLink {
+                            LookupView()
+                        } label: {
+                            DeskRow(title: "Public lookup", subtitle: "Trace a lot or QR code", systemName: "qrcode.viewfinder")
+                                .padding(16)
+                        }
+                        .buttonStyle(.plain)
+                        if let role = store.role, canIntake(role) {
+                            IagRowDivider()
+                            NavigationLink {
+                                IntakeView()
+                            } label: {
+                                DeskRow(title: "Web intake", subtitle: "Onboard a farmer and first batch", systemName: "person.badge.plus")
+                                    .padding(16)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        IagRowDivider()
+                        NavigationLink {
+                            ProfileView()
+                        } label: {
+                            DeskRow(title: "Account", subtitle: "Signed in as \(store.user?.name ?? "")", systemName: "person")
+                                .padding(16)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    NavigationLink("Account") { ProfileView() }
                 }
+                .padding(16)
             }
+            .iagCanvas()
             .navigationTitle("Overview")
+            .navigationBarTitleDisplayMode(.inline)
         }
-    }
-
-    func kpi(_ label: String, _ value: String) -> some View {
-        VStack(alignment: .leading) {
-            Text(label).font(.caption).foregroundStyle(.secondary)
-            Text(value).font(.headline)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -103,47 +125,82 @@ struct PortalHomeView: View {
     var body: some View {
         let store = box.store
         let _ = box.tick
+        let lots = store.scoped("harvest-lots")
         NavigationStack {
-            Form {
-                Section("Your farm") {
-                    Text(store.myFarmer?["name"] ?? store.user?.name ?? "")
-                        .font(.headline)
-                    Text("\(store.myFarmer?["district"] ?? "") · \(store.myFarmer?["variety"] ?? "")")
-                        .foregroundStyle(.secondary)
-                }
-                if let role = store.role, canRequestHarvest(role) {
-                    Section("Request pickup") {
-                        TextField("Volume kg", text: $volume)
-                            .keyboardType(.decimalPad)
-                        TextField("Notes", text: $notes)
-                        if let message { Text(message).foregroundStyle(iagEmerald) }
-                        Button("Send harvest request") {
-                            store.requestHarvest(volumeKg: asNum(volume), notes: notes)
-                            message = "Request sent."
-                            notes = ""
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    WelcomeCard(
+                        name: store.user?.name.split(separator: " ").first.map(String.init) ?? "there",
+                        subtitle: "\(store.myFarmer?["district"] ?? "") · \(store.myFarmer?["variety"] ?? "")",
+                        stats: [
+                            WelcomeStat(id: "lots", label: "Lots", value: "\(lots.count)"),
+                            WelcomeStat(id: "farm", label: "Farm", value: store.myFarmer?["name"] ?? "Yours"),
+                        ]
+                    )
+                    if let role = store.role, canRequestHarvest(role) {
+                        IagSectionHeader(title: "Request pickup")
+                        IagGrouped {
+                            VStack(alignment: .leading, spacing: 12) {
+                                TextField("Volume kg", text: $volume)
+                                    .keyboardType(.decimalPad)
+                                TextField("Notes", text: $notes)
+                                if let message { Text(message).foregroundStyle(IagTheme.success) }
+                                Button("Send harvest request") {
+                                    store.requestHarvest(volumeKg: asNum(volume), notes: notes)
+                                    message = "Request sent."
+                                    notes = ""
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(IagTheme.orange)
+                            }
+                            .padding(16)
                         }
                     }
-                }
-                Section("Your lots") {
-                    ForEach(store.scoped("harvest-lots"), id: \.id) { lot in
-                        NavigationLink {
-                            RecordDetailView(entity: "harvest-lots", id: lot.id)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(lot.label)
-                                Text("\(lot["crop"]) · \(kg(asNum(lot["quantity"]))) · \(lot["grade"])")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                    IagSectionHeader(title: "Your lots")
+                    if lots.isEmpty {
+                        IagGrouped { IagEmptyHint(text: "No lots on your farm yet.") }
+                    } else {
+                        IagGrouped {
+                            ForEach(Array(lots.enumerated()), id: \.element.id) { index, lot in
+                                NavigationLink {
+                                    RecordDetailView(entity: "harvest-lots", id: lot.id)
+                                } label: {
+                                    DeskRow(
+                                        title: lot.label,
+                                        subtitle: "\(lot["crop"]) · \(kg(asNum(lot["quantity"]))) · \(lot["grade"])",
+                                        systemName: "cube.box",
+                                        status: lot.status.isEmpty ? nil : lot.status
+                                    )
+                                    .padding(16)
+                                }
+                                .buttonStyle(.plain)
+                                if index < lots.count - 1 { IagRowDivider() }
                             }
                         }
                     }
+                    IagGrouped {
+                        NavigationLink {
+                            LookupView()
+                        } label: {
+                            DeskRow(title: "Trace a lot", subtitle: "Public lot story", systemName: "viewfinder")
+                                .padding(16)
+                        }
+                        .buttonStyle(.plain)
+                        IagRowDivider()
+                        NavigationLink {
+                            ProfileView()
+                        } label: {
+                            DeskRow(title: "Account", subtitle: store.user?.name ?? "", systemName: "person")
+                                .padding(16)
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
-                Section {
-                    NavigationLink("Trace a lot") { LookupView() }
-                    NavigationLink("Account") { ProfileView() }
-                }
+                .padding(16)
             }
+            .iagCanvas()
             .navigationTitle("My farm")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -156,20 +213,31 @@ struct WorkCatalogView: View {
         let _ = box.tick
         let groups = Dictionary(grouping: store.visibleRoutes()) { $0.group }
         NavigationStack {
-            List {
-                ForEach(TraceGroup.allCases, id: \.self) { group in
-                    if let routes = groups[group], !routes.isEmpty {
-                        Section(groupLabels[group] ?? group.rawValue) {
-                            ForEach(routes, id: \.id) { route in
-                                NavigationLink(route.label) {
-                                    RouteDestination(route: route)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    ForEach(TraceGroup.allCases, id: \.self) { group in
+                        if let routes = groups[group], !routes.isEmpty {
+                            IagSectionHeader(title: groupLabels[group] ?? group.rawValue)
+                            IagGrouped {
+                                ForEach(Array(routes.enumerated()), id: \.element.id) { index, route in
+                                    NavigationLink {
+                                        RouteDestination(route: route)
+                                    } label: {
+                                        DeskRow(title: route.label, subtitle: route.copy, systemName: routeIcon(route))
+                                            .padding(16)
+                                    }
+                                    .buttonStyle(.plain)
+                                    if index < routes.count - 1 { IagRowDivider() }
                                 }
                             }
                         }
                     }
                 }
+                .padding(16)
             }
+            .iagCanvas()
             .navigationTitle("Work")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -181,20 +249,45 @@ struct MoreView: View {
         let store = box.store
         let _ = box.tick
         NavigationStack {
-            List {
-                Section("Registers") {
-                    ForEach(moreRegisters, id: \.entity) { item in
-                        NavigationLink(item.label) {
-                            RecordListView(entity: item.entity, title: item.label)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    IagSectionHeader(title: "Registers")
+                    IagGrouped {
+                        ForEach(Array(moreRegisters.enumerated()), id: \.element.entity) { index, item in
+                            NavigationLink {
+                                RecordListView(entity: item.entity, title: item.label)
+                            } label: {
+                                DeskRow(title: item.label, subtitle: "Open register", systemName: "archivebox")
+                                    .padding(16)
+                            }
+                            .buttonStyle(.plain)
+                            if index < moreRegisters.count - 1 { IagRowDivider() }
                         }
                     }
+                    IagSectionHeader(title: "Admin")
+                    IagGrouped {
+                        NavigationLink {
+                            AuditView()
+                        } label: {
+                            DeskRow(title: "Audit log", subtitle: "Who changed what", systemName: "list.bullet.rectangle")
+                                .padding(16)
+                        }
+                        .buttonStyle(.plain)
+                        IagRowDivider()
+                        NavigationLink {
+                            ProfileView()
+                        } label: {
+                            DeskRow(title: "Account", subtitle: store.user?.name ?? "", systemName: "person")
+                                .padding(16)
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
-                Section("Admin") {
-                    NavigationLink("Audit log") { AuditView() }
-                    NavigationLink("Account") { ProfileView() }
-                }
+                .padding(16)
             }
+            .iagCanvas()
             .navigationTitle("More")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -209,13 +302,14 @@ struct ProfileView: View {
             Section("Signed in") {
                 Text(store.user?.name ?? "")
                 Text(store.user?.role.rawValue.capitalized ?? "").foregroundStyle(.secondary)
-                Text("Trace iOS \(appVersion)").font(.caption).foregroundStyle(.secondary)
+                Text("\(appName) \(appVersion)").font(.caption).foregroundStyle(.secondary)
             }
             Section {
                 Button("Sign out", role: .destructive) { store.logout() }
                 Button("Reset demo data") { store.resetDemo() }
             }
         }
+        .iagCanvas()
         .navigationTitle("Account")
     }
 }

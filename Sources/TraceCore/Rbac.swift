@@ -8,6 +8,7 @@ public enum TraceRole: String, Equatable, Sendable, CaseIterable {
 }
 
 public let demoPassword = "iagdemo"
+public let appName = "IAG Trace"
 public let appVersion = "1.0.0"
 public let storeKey = "iag-trace-ios-v1"
 
