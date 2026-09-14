@@ -44,20 +44,18 @@ struct RecordListView: View {
                 NavigationLink {
                     RecordDetailView(entity: entity, id: row.id)
                 } label: {
-                    VStack(alignment: .leading) {
-                        Text(row.label)
-                        Text(row.subtitle(meta?.columns ?? ["status"]))
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Text(row.status)
-                            .font(.caption2)
-                            .foregroundStyle(statusColor(row.status))
-                    }
+                    DeskRow(
+                        title: row.label,
+                        subtitle: row.subtitle(meta?.columns ?? ["status"]),
+                        systemName: "doc.text",
+                        status: row.status.isEmpty ? nil : row.status
+                    )
                 }
             }
         }
         .navigationTitle(title)
         .searchable(text: $query)
+        .iagCanvas()
     }
 }
 
@@ -97,6 +95,7 @@ struct RecordDetailView: View {
                 Text("Record not found.")
             }
         }
+        .iagCanvas()
         .navigationTitle(entities[entity]?.singular ?? entity)
     }
 }
@@ -144,6 +143,7 @@ struct LookupView: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .iagCanvas()
         .navigationTitle("Lookup")
     }
 }
@@ -183,7 +183,7 @@ struct IntakeView: View {
                 TextField("Gross kg", text: $gross)
                 TextField("Tare", text: $tare)
                 TextField("Moisture", text: $moisture)
-                if let message { Text(message).foregroundStyle(iagEmerald) }
+                if let message { Text(message).foregroundStyle(IagTheme.success) }
                 Button("Onboard") {
                     let farmer = box.store.intakeFarmer(
                         kind: kind, name: name, phone: phone, village: village, district: district,
@@ -194,6 +194,7 @@ struct IntakeView: View {
                 .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }
+        .iagCanvas()
         .navigationTitle("Web intake")
     }
 }
@@ -211,6 +212,7 @@ struct AuditView: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .iagCanvas()
         .navigationTitle("Audit")
     }
 }
@@ -223,6 +225,7 @@ struct HubView: View {
                 Text(section.copy).font(.caption).foregroundStyle(.secondary)
             }
         }
+        .iagCanvas()
         .navigationTitle("Hub")
     }
 }
@@ -240,6 +243,7 @@ struct MapView: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .iagCanvas()
         .navigationTitle("Farm map")
     }
 }
@@ -257,6 +261,7 @@ struct ReportsView: View {
             LabeledContent("EUDR compliant", value: "\(store.eudrPercent())%")
             LabeledContent("Pending inspections", value: "\(store.pendingInspections.count)")
         }
+        .iagCanvas()
         .navigationTitle("Reports")
     }
 }
