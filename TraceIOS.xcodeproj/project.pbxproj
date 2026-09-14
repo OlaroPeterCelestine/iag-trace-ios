@@ -1,0 +1,272 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2168B32C0B1F7BB4B8F9C09E /* TraceIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FE0B79DCB29B3E0AD40A2B /* TraceIOSApp.swift */; };
+		1CB61EFA8150446E28595406 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5858A0E0E2201B92DA6CCC /* LoginView.swift */; };
+		8B4334446378D9AC4B14D5E4 /* ShellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E2ADCDC13D7DD79363738B /* ShellViews.swift */; };
+		5C621F36A0216493F8BF9CD7 /* RecordViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D09DE96D5972A468BA6F9D /* RecordViews.swift */; };
+		2A8EB5D3376C791DADAC7B16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C0AAAAA1245D07FC1AF5570 /* Assets.xcassets */; };
+		A594D57D3AB4EE865BA4177C /* TraceCore in Frameworks */ = {isa = PBXBuildFile; productRef = A31D122B87DD29E797CB4427 /* TraceCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E3FE0B79DCB29B3E0AD40A2B /* TraceIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceIOSApp.swift; sourceTree = "<group>"; };
+		AF5858A0E0E2201B92DA6CCC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		21E2ADCDC13D7DD79363738B /* ShellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellViews.swift; sourceTree = "<group>"; };
+		80D09DE96D5972A468BA6F9D /* RecordViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViews.swift; sourceTree = "<group>"; };
+		9C0AAAAA1245D07FC1AF5570 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D957E19B16B69713B7749A90 /* Trace iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trace iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		68ED96E173B8E85EFF925036 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A594D57D3AB4EE865BA4177C /* TraceCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EAE9011C23DCA5E5F486AF2D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E3FE0B79DCB29B3E0AD40A2B /* TraceIOSApp.swift */,
+				AF5858A0E0E2201B92DA6CCC /* LoginView.swift */,
+				21E2ADCDC13D7DD79363738B /* ShellViews.swift */,
+				80D09DE96D5972A468BA6F9D /* RecordViews.swift */,
+				9C0AAAAA1245D07FC1AF5570 /* Assets.xcassets */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A511EC6FC8BCAFC6B21CD81D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D957E19B16B69713B7749A90 /* Trace iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22EA56DD29576E62BCCCA1AA = {
+			isa = PBXGroup;
+			children = (
+				EAE9011C23DCA5E5F486AF2D /* App */,
+				A511EC6FC8BCAFC6B21CD81D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		874E7FD7A39CF1D6319F589D /* Trace iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8949D512A1ED272DC698682 /* Build configuration list for PBXNativeTarget "Trace iOS" */;
+			buildPhases = (
+				2A976C55E781D531D45C10A3 /* Sources */,
+				68ED96E173B8E85EFF925036 /* Frameworks */,
+				D358F9953273580C5B97B1E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Trace iOS";
+			packageProductDependencies = (
+				A31D122B87DD29E797CB4427 /* TraceCore */,
+			);
+			productName = "Trace iOS";
+			productReference = D957E19B16B69713B7749A90 /* Trace iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		98F54143AB4E86B28C3AFEE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = C74034AE7265F595782FCC65 /* Build configuration list for PBXProject "TraceIOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22EA56DD29576E62BCCCA1AA;
+			packageReferences = (
+				1F7F6697A3A819DDF26C9E55 /* XCLocalSwiftPackageReference */,
+			);
+			productRefGroup = A511EC6FC8BCAFC6B21CD81D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				874E7FD7A39CF1D6319F589D /* Trace iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D358F9953273580C5B97B1E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A8EB5D3376C791DADAC7B16 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A976C55E781D531D45C10A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2168B32C0B1F7BB4B8F9C09E /* TraceIOSApp.swift in Sources */,
+				1CB61EFA8150446E28595406 /* LoginView.swift in Sources */,
+				8B4334446378D9AC4B14D5E4 /* ShellViews.swift in Sources */,
+				5C621F36A0216493F8BF9CD7 /* RecordViews.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B0B56C12A90899E4707AE233 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C2FD164E71C295B24A6638ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C9A1B2E190A1E670EB1D4ACA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Trace iOS";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = africa.iag.trace.ios;
+				PRODUCT_NAME = "Trace iOS";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		41E70647AD8CF222172708CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Trace iOS";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = africa.iag.trace.ios;
+				PRODUCT_NAME = "Trace iOS";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C74034AE7265F595782FCC65 /* Build configuration list for PBXProject "TraceIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0B56C12A90899E4707AE233 /* Debug */,
+				C2FD164E71C295B24A6638ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E8949D512A1ED272DC698682 /* Build configuration list for PBXNativeTarget "Trace iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9A1B2E190A1E670EB1D4ACA /* Debug */,
+				41E70647AD8CF222172708CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		1F7F6697A3A819DDF26C9E55 /* XCLocalSwiftPackageReference */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A31D122B87DD29E797CB4427 /* TraceCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TraceCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+}
