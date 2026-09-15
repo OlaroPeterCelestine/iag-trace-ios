@@ -21,6 +21,7 @@
 		21E2ADCDC13D7DD79363738B /* ShellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellViews.swift; sourceTree = "<group>"; };
 		80D09DE96D5972A468BA6F9D /* RecordViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViews.swift; sourceTree = "<group>"; };
 		9C0AAAAA1245D07FC1AF5570 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B7E2F1A09C4D81E6A2B05C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D957E19B16B69713B7749A90 /* Trace iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trace iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -44,6 +45,7 @@
 				21E2ADCDC13D7DD79363738B /* ShellViews.swift */,
 				80D09DE96D5972A468BA6F9D /* RecordViews.swift */,
 				9C0AAAAA1245D07FC1AF5570 /* Assets.xcassets */,
+				B7E2F1A09C4D81E6A2B05C31 /* Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
